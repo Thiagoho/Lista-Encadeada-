@@ -1,1 +1,36 @@
 Lista Encadeada / Lista Ligada / Linked Lista
+Lista Encadeada / Lista Ligada / Linked Lista
+A lista Encadeada possui além do seu valor, um ponteiro aopntando
+para o próximo elemento.
+
+-----
+|1| | -> NULL 
+-----
+Se | 1| | ele esta apontado para -> NULL.
+Aqui poderia ser uma string ou qualquer coisa.
+
+------------------------------------------
+Cada elemento desse é chamado de nó.
+
+Nó        Nó       Nó
+-----    -----    -----
+|1| | -> |4| | -> |5| | -> NULL
+-----    -----    -----
+
+Se estiver outra lista, então esse leista anterior aponta pra ela e essa nova
+lista aponta pra nó.
+Dessa forma que funciona a Linked List ou a lista Encadeada ela encadeada.
+
+     valor ponteiro   aponta    nó
+Obs:  |1|     |         ->     NULL
+Por que dentro dos valores aqui dela tem além dos valores tem um ponteiro 
+apontando  para o próximo elemento da lista se há o elemento aqui foi o último.
+Ele está apontando pra nó até chegar um outro elemento para ser adicionado no final dela.
+--------------------------------------------------
+Esse exemplo aqui esta explicando a seguinte função
+void inicia(no *le) {
+    le->prox = NULL;
+}
+Ela vai iniciar vázia ou se apontando para o vázio está OK apontando pro vázio NULL.
+---------------------------------------------------
+Na lista Encadeada podemos inserir elementos no [inicio] ou [fim].
