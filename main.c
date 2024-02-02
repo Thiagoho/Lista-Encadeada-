@@ -20,10 +20,10 @@ typedef struct st_no no;
 int vazia(no* le) { // le -> lista encadeada
     
     if(le->prox == NULL) { //Verificação
-        return 0;
+        return 1;
 
     } else {
-        return 1;
+        return 0;
     }// Estamos usando o verdadeiro e falso.
 }
 // Uma função agora chamada inicia que ela vai inicializar a nossa lista.
@@ -47,7 +47,7 @@ void libera(no *le) {
     }
 }
 // Uma função para exibir a lista.
-void exibir(no *le){
+void exibe(no *le){
     if(vazia(le)) {
         printf("Lista esta vazia!\n");
         return;
@@ -57,15 +57,98 @@ void exibir(no *le){
 /*Vamos fazer um while porque enquanto o tempo que for diferente de 'nu' porque lá só a gente 
 espera no NULL.*/
     while(tmp != NULL) {
-        printf("%d", tmp->valor);
+        printf("%d ", tmp->valor);
         tmp = tmp->prox; // Se ele é NULL ou não.
     }
     printf("\n\n");
 }
 //Uma função inserir o  inicio.
 void insereInicio(no *le) {
-// Criamos uma nova variável *novo
+// Criamos uma nova variável -> no *novo
+/*Ele vai retornar um ponteiro para o nó e vamos utilizar o malloc para fazer essa alocação 
+dinâmica.*/
+    no *novo = (no*)malloc(sizeof(no));
+    if(!novo) {
+        printf("Sem memoria desponivel!\n");
+        exit(1); //Sair do programa.
+    }
+    printf("Informe o valor: ");
+    scanf("%d", &novo->valor);
+// head anterior
+    no *oldHead = le->prox;
+
+    le->prox = novo;
+    novo->prox = oldHead;
 
 }
-
-
+// Uma função inserir no final.
+void insereFinal(no *le) {
+    no *novo = (no*) malloc(sizeof(no));
+    if(!novo) {
+        printf("Sem memoria disponivel!\n");
+    }
+    printf("Informe o valor: ");
+    scanf("%d", &novo->valor);
+    novo->prox = NULL;
+    if(vazia(le)) {
+        le->prox = novo;
+    } else {
+        no *tmp = le->prox;
+        while(tmp->prox != NULL) {
+            tmp = tmp->prox;
+        }
+        tmp->prox = novo;
+    }
+}
+// Uma função inserir opção.
+// Só para a gente montar executar aquilo que ele deve fazer.
+void opcao(no *le, int op) {
+    switch(op) {
+        case 0:
+            libera(le); // A nossa função libera que no caso ele vai esvaziar ela.
+            break;
+        case 1:
+            exibe(le); //Exibe então vai vim lá na função vai exiber todos os valores.
+            break;
+        case 2:
+            insereInicio(le);
+            break;
+        case 3: 
+            insereFinal(le);
+            break;
+        case 4:
+            inicia(le);
+            break;
+        default:
+            printf("Comando invalido\n\n");
+    }
+}
+// Uma função inserir o menu.
+int menu() {
+    int opt;
+    printf("Escolha a opcao: \n");
+    printf("[0] - Sair: \n");
+    printf("[1] - Exibir: \n");
+    printf("[2] - Adicionar no no inicio:\n");
+    printf("[3] - Adicionar no no fim: \n");
+    printf("[4] - zerar lista: \n");
+    printf("Opcao: ");
+    scanf("%d", &opt);
+    
+    return opt;
+}
+int main() {
+    no *le = (no*)malloc(sizeof(no));
+    if(!le) {
+        printf("Sem memoria disponivel: ");
+        exit(1);
+    }
+    inicia(le);
+    int opt;
+    do {
+        opt = menu();
+        opcao(le, opt);
+    }while(opt);
+    free(le);
+    return 0;
+}
