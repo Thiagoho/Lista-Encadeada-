@@ -86,6 +86,7 @@ void insereFinal(no *le) {
     no *novo = (no*) malloc(sizeof(no));
     if(!novo) {
         printf("Sem memoria disponivel!\n");
+        exit(1);
     }
     printf("Informe o valor: ");
     scanf("%d", &novo->valor);
